@@ -20,13 +20,13 @@ function apiService($http, Upload) {
             data: data
         }).then(function successCallback(response) {
             if (response.data.code != 200) {
-                toastr.error(response.data.reason)
+                console.log(response.data.content)
                 cb();
             } else {
                 cb(response.data.content)
             }
         }, function errorCallback(response) {
-            toastr.error(response)
+            console.log(response)
             cb();
         });
     }
@@ -68,7 +68,7 @@ function apiService($http, Upload) {
             },
             (error) => {
                 if(error.config.file.size>50*1024*1024) 
-                    toastr.error(file.name + ' is greater than 50MB');
+                    console.log(file.name + ' is greater than 50MB');
                 cb();
             });
     }

@@ -1,5 +1,5 @@
 require('./style.css')
-let appInfo = require('./app.info')
+let appOwner = require('./app.owner')
 let appConfig = require('./app.config')
 let chatService = require('./api.service.js')
 let moduleName = componentName = 'meiChatCustomer'
@@ -15,17 +15,17 @@ angular.module(moduleName, [chatService.name, 'ngFileUpload'])
 function Controller(apiServiceCustomer, $scope, $element, $timeout) {
     var self = this
     this.showInbox = false
-    let owner = appInfo.owner
-    $timeout(()=> {
-        apiServiceCustomer.getConversation({ owner: owner }, (res) => {
-            if (!$.isEmptyObject(res)) {
-                self.conver = res
-                socket.emit('join_room', self.conver.id)
-                self.user = res.Users[0]
-                msg_history_scroll(500)
-            } else {
+    let owner = appOwner.owner
+
+    apiServiceCustomer.getConversation({ owner: owner }, (res) => {
+        if (!$.isEmptyObject(res)) {
+            self.conver = res
+            socket.emit('join_room', self.conver.id)
+            self.user = res.Users[0]
+            msg_history_scroll(500)
+        } else {
+            $timeout(() => {
                 self.showInbox = true
-                console.log($('.write_msg_customer'))
                 self.conver = {
                     Messages: [{
                         content: 'Xin chào! Tôi có thể giúp gì cho bạn?',
@@ -35,15 +35,15 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
                     }]
                 }
                 self.user = {}
-            }
-        })
-    }, 2000)
-    
+            }, 2000)
+
+        }
+    })
+
     $('.write_msg_customer').keypress((e) => {
-        console.log('fawe')
         if (e.which == 13) {
             excNewCustomer(() => {
-                apiServiceCustomer.sendMessage(token, {
+                apiServiceCustomer.sendMessage({
                     content: $('.write_msg_customer').val(),
                     type: 'text',
                     idUser: self.user.id,
@@ -77,7 +77,7 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
                     })
                 }
             })
-        cb()
+        else cb()
     }
     socket.on('sendMessage', (data) => {
         self.conver.Messages.push(data)
