@@ -91,7 +91,7 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
         }
     })
     function seenMessage() {
-        apiService.seenMessage({
+        apiServiceCustomer.seenMessage({
             username: self.user.username,
             nameConversation: self.conver.name
         }, (res) => {

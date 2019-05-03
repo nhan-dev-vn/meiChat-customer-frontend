@@ -7,6 +7,9 @@ mei-chat-customer .container {
 	height: auto;
 	padding: 0px;
 }
+mei-chat-customer img {
+    max-width: 100%;
+}
 
 mei-chat-customer .icon_open {
 	font-size: 50px;
@@ -97,7 +100,6 @@ mei-chat-customer .incoming_msg {
 
 mei-chat-customer .received_msg {
     display: inline-block;
-    padding: 0 0 0 10px;
     vertical-align: top;
     width: 92%;
 }
