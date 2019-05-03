@@ -2,11 +2,10 @@ mei-chat-customer .container {
 	z-index: 1000;
 	position: fixed;
 	bottom: 10px;
-	left: 10px;
+	right: 10px;
 	width: auto;
 	height: auto;
 	padding: 0px;
-	border-radius: 5px;
 }
 
 mei-chat-customer .icon_open {

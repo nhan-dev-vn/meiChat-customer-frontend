@@ -3,7 +3,7 @@ let appOwner = require('./app.owner')
 let appConfig = require('./app.config')
 let chatService = require('./api.service.js')
 let moduleName = componentName = 'meiChatCustomer'
-let socket = io(appConfig.baseUrl)
+let socket = io(appConfig.baseUrl, {transports: ['websocket']})
 
 angular.module(moduleName, [chatService.name, 'ngFileUpload'])
     .component(componentName, {
@@ -105,12 +105,4 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
             $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
         }, timeout)
     }
-    $('.container').draggable({
-        start: function () {
-            $(this).css("bottom", "auto");
-            $(this).css("right", "auto");
-        },
-        containment: 'window',
-        cursor: 'move'
-    })
 };
