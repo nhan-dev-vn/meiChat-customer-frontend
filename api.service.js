@@ -53,9 +53,6 @@ function apiService($http, Upload) {
     this.upload = (data, file, cb) => {
         Upload.upload({
             url: self.URL+UPLOAD,
-            headers: {
-                'Authorization': token
-            },
             file: file,
             fields: data
         }).then(
