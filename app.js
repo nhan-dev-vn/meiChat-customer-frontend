@@ -89,7 +89,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
             }, (res) => {
                 if (!$.isEmptyObject(res)) {
                     self.user = res
-                    apiServiceCustomer.createConversation({ owner: owner }, (res) => {
+                    apiServiceCustomer.createConversation({ name: ip, owner: owner }, (res) => {
                         if (res) {
                             self.conver = res
                             msg_history_scroll(500)
