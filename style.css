@@ -91,6 +91,9 @@ mei-chat-customer .incoming_msg_img {
     display: inline-block;
     width: 6%;
 }
+mei-chat-customer .incoming_msg {
+    margin: 5px 0px 0px 5px;
+}
 
 mei-chat-customer .received_msg {
     display: inline-block;
@@ -117,7 +120,7 @@ mei-chat-customer .time_date {
 }
 
 mei-chat-customer .received_withd_msg {
-    width: 80%;
+    width: 65%;
 }
 
 mei-chat-customer .msg {
@@ -138,12 +141,12 @@ mei-chat-customer .sent_msg p {
 
 mei-chat-customer .outgoing_msg {
     overflow: hidden;
-    margin: 26px 0 26px;
+    margin: 5px 5px 0px 0px;
 }
 
 mei-chat-customer .sent_msg {
     float: right;
-    width: 80%;
+    width: 65%;
 }
 mei-chat-customer ::-webkit-scrollbar-thumb {
 	background: rgb(207, 207, 207);
