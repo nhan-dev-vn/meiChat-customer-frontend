@@ -65,7 +65,7 @@ function apiService($http, Upload) {
             },
             (error) => {
                 if(error.config.file.size>50*1024*1024) 
-                    console.log(file.name + ' is greater than 50MB');
+                    alert(file.name + ' is greater than 50MB');
                 cb();
             });
     }
