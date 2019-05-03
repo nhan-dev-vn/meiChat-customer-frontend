@@ -1,2 +1,4 @@
 node_modules
+app.owner.js
 package_log.json
+app.config.js
