@@ -47,7 +47,8 @@ mei-chat-customer .name_inbox {
 mei-chat-customer .msg_history {
 	width: 100%;
 	height: 310px;
-	background: #fafafa;
+    background: #fafafa;
+    overflow-y: scroll;
 }
 mei-chat-customer .msg_type {
 	width: 100%;
