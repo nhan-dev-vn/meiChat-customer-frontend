@@ -43,7 +43,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
         files.forEach((file, i) => {
             let type = file.type.substring(0, 5)
             let time = new Date()
-            apiServiceCustomer.upload(token, {
+            apiServiceCustomer.upload({
                 type: type == 'image' ? 'img' : 'file',
                 content: file.name,
                 username: self.user.username,
