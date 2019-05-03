@@ -12,7 +12,7 @@ angular.module(moduleName, [chatService.name, 'ngFileUpload'])
         controllerAs: 'mcc'
     });
 
-function Controller(apiServiceCustomer, $scope, $element, $timeout) {
+function Controller(apiServiceCustomer, $scope, $timeout) {
     var self = this
     this.showInbox = false
     let owner = appOwner.owner
@@ -39,7 +39,23 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
 
         }
     })
-
+    this.sendImgFile = (files) => {
+        files.forEach((file, i) => {
+            let type = file.type.substring(0, 5)
+            let time = new Date()
+            apiServiceCustomer.upload(token, {
+                type: type == 'image' ? 'img' : 'file',
+                content: file.name,
+                username: self.user.username,
+                idUser: self.user.id,
+                nameConversation: self.conver.name,
+                idConversation: self.conver.id,
+                path: config.baseUrl + '/' + self.conver.name + '/' + time.getTime() + '_' + file.name,
+                paththumb: type != 'image' ? '' : (appConfig.baseUrl + '/' + self.conver.name + '/' + time.getTime() + '_' + file.name),
+                sendAt: time
+            }, file, (res) => { })
+        })
+    }
     $('.write_msg_customer').keypress((e) => {
         if (e.which == 13) {
             excNewCustomer(() => {
@@ -105,4 +121,7 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
             $('.msg_history').scrollTop($('.msg_history')[0].scrollHeight);
         }, timeout)
     }
+    $scope.$watch(function() {return self.showInbox}, function(newValue, oldValue) {
+        if(newValue) msg_history_scroll(0)
+    })
 };
