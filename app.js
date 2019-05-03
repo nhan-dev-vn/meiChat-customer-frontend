@@ -50,7 +50,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
                 idUser: self.user.id,
                 nameConversation: self.conver.name,
                 idConversation: self.conver.id,
-                path: config.baseUrl + '/' + self.conver.name + '/' + time.getTime() + '_' + file.name,
+                path: appConfig.baseUrl + '/' + self.conver.name + '/' + time.getTime() + '_' + file.name,
                 paththumb: type != 'image' ? '' : (appConfig.baseUrl + '/' + self.conver.name + '/' + time.getTime() + '_' + file.name),
                 sendAt: time
             }, file, (res) => { })
