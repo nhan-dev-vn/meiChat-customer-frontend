@@ -4,7 +4,7 @@
             <p class="name_inbox">Hỗ trợ viên</p>
             <p class="icon_close" ng-click="mcc.showInbox=!mcc.showInbox">X</p>
         </div>
-        <div class="msg_history" ngf-drop="message.sendImgFile($files)" class="drop-box" ngf-drag-over-class="'dragover'"
+        <div class="msg_history" ngf-drop="mcc.sendImgFile($files)" class="drop-box" ngf-drag-over-class="'dragover'"
         ngf-multiple="true">
             <div class="msg" ng-repeat="msg in mcc.conver.Messages">
                 <div class="incoming_msg" ng-if="mcc.user.username != msg.username">
