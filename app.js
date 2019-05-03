@@ -19,7 +19,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     this.showInbox = false
     let owner = appOwner.owner
 
-    apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {
+    $timeout(() => {apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {
         if (!$.isEmptyObject(res)) {
             self.conver = res
             socket.emit('join_room', self.conver.id)
@@ -41,7 +41,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
             }, 2000)
 
         }
-    })
+    })}, 1000)
     this.sendImgFile = (files) => {
         excNewCustomer(()=> {
             files.forEach((file, i) => {
