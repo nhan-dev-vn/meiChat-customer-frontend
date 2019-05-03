@@ -48,8 +48,8 @@ function Controller(apiServiceCustomer, $scope, $element, $timeout) {
                     type: 'text',
                     idUser: self.user.id,
                     username: self.user.username,
-                    idConversation: self.curConver.id,
-                    nameConversation: self.curConver.name,
+                    idConversation: self.conver.id,
+                    nameConversation: self.conver.name,
                     sendAt: new Date()
                 }, (res) => {
                     e.preventDefault()
