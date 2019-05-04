@@ -61,19 +61,23 @@ mei-chat-customer .input_msg_write {
 	height: 100%;
 	width: 100%;
 }
-mei-chat-customer .input_msg_write input {
+mei-chat-customer .input_msg_write textarea {
     background: white;
     padding: 1px 5px;
     border: medium none;
     color: #4c4c4c;
     font-size: 15px;
     min-height: 48px;
-    width: 100%;
+    width: calc(100% - 40px);
     height: 100%;
+    max-width: calc(100% - 40px);
+    max-height: 100%;
+    min-width: calc(100% - 40px);
+    min-height: 100%;
     border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
-mei-chat-customer .input_msg_write input:focus {
+mei-chat-customer .input_msg_write textarea:focus {
 	outline: none;
 }
 
@@ -103,6 +107,10 @@ mei-chat-customer .received_msg {
     display: inline-block;
     vertical-align: top;
     width: 92%;
+}
+mei-chat-customer .msg_text, .msg_file {
+    word-wrap: break-word;
+    white-space: pre-line;
 }
 
 mei-chat-customer .received_withd_msg p {

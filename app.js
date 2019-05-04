@@ -7,7 +7,7 @@ let socket = io(appConfig.baseUrl, { transports: ['websocket'] })
 let ip = ''
 getLocalIp()
 
-angular.module(moduleName, [chatService.name, 'ngFileUpload'])
+angular.module(moduleName, [chatService.name, 'ngFileUpload', 'ngSanitize'])
     .component(componentName, {
         template: require('./index.html'),
         controller: Controller,
@@ -17,6 +17,7 @@ angular.module(moduleName, [chatService.name, 'ngFileUpload'])
 function Controller(apiServiceCustomer, $scope, $timeout) {
     var self = this
     this.showInbox = false
+    this.downloadicon = '<i class="glyphicon glyphicon-circle-arrow-down"></i>'
     let owner = appOwner.owner
 
     $timeout(() => {apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {

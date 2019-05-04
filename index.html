@@ -5,16 +5,14 @@
             <p class="icon_close" ng-click="mcc.showInbox=!mcc.showInbox">X</p>
         </div>
         <div class="msg_history" ngf-drop="mcc.sendImgFile($files)" class="drop-box" ngf-drag-over-class="'dragover'"
-        ngf-multiple="true">
+            ngf-multiple="true">
             <div class="msg" ng-repeat="msg in mcc.conver.Messages">
                 <div class="incoming_msg" ng-if="mcc.user.username != msg.username">
                     <div class="received_msg">
                         <div class="received_withd_msg">
-                            <p class="msg_text" ng-if="msg.type=='text'">{{msg.content}}</p>
+                            <p class="msg_text" ng-if="msg.type=='text'" ng-bind-html="msg.content"></p>
                             <p class="msg_file" ng-if="msg.type=='file'">
-                                <a href="{{msg.path+'/download'}}">
-                                    <i class="glyphicon glyphicon-circle-arrow-down"></i>
-                                    {{msg.content}}
+                                <a href="{{msg.path+'/download'}}" ng-bind-html="mcc.downloadicon + msg.content">
                                 </a>
                             </p>
                             <img ng-src="{{msg.paththumb}}" alt="not found" ng-if="msg.type=='img'">
@@ -24,10 +22,9 @@
                 </div>
                 <div class="outgoing_msg" ng-if="mcc.user.username == msg.username">
                     <div class="sent_msg">
-                        <p class="msg_text" ng-if="msg.type=='text'">{{msg.content}}</p>
-                        <p class="sent_msg_file" ng-if="msg.type=='file'"><a href="{{msg.path+'/download'}}">
-                                <i class="glyphicon glyphicon-circle-arrow-down"></i>
-                                {{msg.content}}
+                        <p class="msg_text" ng-if="msg.type=='text'" ng-bind-html="msg.content"></p>
+                        <p class="msg_file sent_msg_file" ng-if="msg.type=='file'">
+                            <a href="{{msg.path+'/download'}}" ng-bind-html="mcc.downloadicon + msg.content">
                             </a>
                         </p>
                         <img ng-src="{{msg.paththumb}}" alt="not found" ng-if="msg.type=='img'">
@@ -38,7 +35,7 @@
         </div>
         <div class="msg_type">
             <div class="input_msg_write">
-                <input type="text" class="write_msg_customer" placeholder="Gõ tin nhắn..." ng-model="mcc.msg_typing" />
+                <textarea type="text" class="write_msg_customer" placeholder="Gõ tin nhắn..." ng-model="mcc.msg_typing"></textarea>
                 <button class="msg_send_btn" type="button">
                     <span class="glyphicon glyphicon-paperclip" aria-hidden="true" ngf-select="mcc.sendImgFile($files)"
                         multiple="multiple"></span>
