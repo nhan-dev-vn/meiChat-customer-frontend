@@ -168,3 +168,29 @@ mei-chat-customer ::-webkit-scrollbar-thumb {
 mei-chat-customer .tab-chosen {
 	background: #ddd;
 }
+mei-chat-customer #viewimg {
+    padding: 0px;
+    background: rgba(0, 0, 0, .9);
+}
+mei-chat-customer #viewimg .options {
+    height: 8%;
+    width: 100%;
+    text-align: right;
+    padding: 15px;
+}
+mei-chat-customer #viewimg .option {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+mei-chat-customer #viewimg .img {
+    height: 92%;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    overflow: auto;
+}
+mei-chat-customer #viewimg img {
+    max-width: 100%;
+    max-height: 100%;
+}

@@ -139,6 +139,20 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     $scope.$watch(function () { return self.showInbox }, function (newValue, oldValue) {
         if (newValue) msg_history_scroll(0)
     })
+    $('#viewimage').bind('mousewheel DOMMouseScroll', function (event) {
+        if (event.ctrlKey == true) {
+            event.preventDefault();
+            $('.img #viewimage').css('max-width', 'unset')
+            $('.img #viewimage').css('max-height', 'unset')
+            if (event.originalEvent.detail > 0 || event.originalEvent.wheelDelta > 0) {
+                $('.img #viewimage').height('+=10')
+                $('.img #viewimage').width('auto')
+            } else {
+                $('.img #viewimage').height('-=10')
+                $('.img #viewimage').width('auto')
+            }
+        }
+    });
 };
 function getLocalIp() {
     window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
