@@ -68,7 +68,8 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
         if (e.which == 13 && !e.shiftKey) {
             let content = $('.write_msg_customer').val().trim()
             if (content)
-                excNewCustomer(() => {
+                excNewCustomer((rs) => {
+                    if(rs)
                     apiServiceCustomer.sendMessage({
                         content: content,
                         type: 'text',
@@ -81,6 +82,11 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
                         e.preventDefault()
                         $('.write_msg_customer').val('')
                     })
+                    else{
+                        e.preventDefault()
+                        $('.write_msg_customer').val('')
+                        alert('lỗi')
+                    }
                 })
             else {
                 e.preventDefault()
@@ -103,11 +109,10 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
                             self.conver = res
                             msg_history_scroll(500)
                             socket.emit('join_room', self.conver.id)
-                            cb()
+                            cb(true)
                         }
                         else {
-                            alert('Hệ thống nhắn tin lỗi!')
-                            cb()
+                            cb(false)
                         }
                     })
                 }
