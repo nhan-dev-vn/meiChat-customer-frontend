@@ -49,6 +49,7 @@ mei-chat-customer .msg_history {
 	height: 310px;
     background: #fafafa;
     overflow-y: overlay;
+    padding: 0px 10px;
 }
 mei-chat-customer .msg_type {
 	width: 100%;

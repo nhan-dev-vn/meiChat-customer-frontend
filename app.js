@@ -20,31 +20,33 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     this.downloadicon = '<i class="glyphicon glyphicon-circle-arrow-down"></i>'
     let owner = appOwner.owner
 
-    $timeout(() => {apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {
-        if (!$.isEmptyObject(res)) {
-            self.conver = res
-            socket.emit('join_room', self.conver.id)
-            self.user = res.Users[0]
-            if(self.conver.newMess) self.showInbox = true
-            msg_history_scroll(500)
-        } else {
-            $timeout(() => {
-                self.showInbox = true
-                self.conver = {
-                    Messages: [{
-                        content: 'Xin chào! Tôi có thể giúp gì cho bạn?',
-                        username: 'admin',
-                        type: 'text',
-                        sendAt: new Date()
-                    }]
-                }
-                self.user = {}
-            }, 2000)
+    $timeout(() => {
+        apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {
+            if (!$.isEmptyObject(res)) {
+                self.conver = res
+                socket.emit('join_room', self.conver.id)
+                self.user = res.Users[0]
+                if (self.conver.newMess) self.showInbox = true
+                msg_history_scroll(500)
+            } else {
+                $timeout(() => {
+                    self.showInbox = true
+                    self.conver = {
+                        Messages: [{
+                            content: 'Xin chào! Tôi có thể giúp gì cho bạn?',
+                            username: 'admin',
+                            type: 'text',
+                            sendAt: new Date()
+                        }]
+                    }
+                    self.user = {}
+                }, 2000)
 
-        }
-    })}, 1000)
+            }
+        })
+    }, 1000)
     this.sendImgFile = (files) => {
-        excNewCustomer(()=> {
+        excNewCustomer(() => {
             files.forEach((file, i) => {
                 let type = file.type.substring(0, 5)
                 let time = new Date()
@@ -63,21 +65,27 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
         })
     }
     $('.write_msg_customer').keypress((e) => {
-        if (e.which == 13) {
-            excNewCustomer(() => {
-                apiServiceCustomer.sendMessage({
-                    content: $('.write_msg_customer').val(),
-                    type: 'text',
-                    idUser: self.user.id,
-                    username: self.user.username,
-                    idConversation: self.conver.id,
-                    nameConversation: self.conver.name,
-                    sendAt: new Date()
-                }, (res) => {
-                    e.preventDefault()
-                    $('.write_msg_customer').val('')
+        if (e.which == 13 && !e.shiftKey) {
+            let content = $('.write_msg_customer').val().trim()
+            if (content)
+                excNewCustomer(() => {
+                    apiServiceCustomer.sendMessage({
+                        content: content,
+                        type: 'text',
+                        idUser: self.user.id,
+                        username: self.user.username,
+                        idConversation: self.conver.id,
+                        nameConversation: self.conver.name,
+                        sendAt: new Date()
+                    }, (res) => {
+                        e.preventDefault()
+                        $('.write_msg_customer').val('')
+                    })
                 })
-            })
+            else {
+                e.preventDefault()
+                $('.write_msg_customer').val('')
+            }
         }
     })
     function excNewCustomer(cb) {
