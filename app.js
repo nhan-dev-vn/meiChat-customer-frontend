@@ -99,11 +99,14 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
                 if (!$.isEmptyObject(res)) {
                     self.user = res
                     apiServiceCustomer.createConversation({ id: self.user.id, name: ip, owner: owner }, (res) => {
-                        if (res) {
+                        if (!$.isEmptyObject(res)) {
                             self.conver = res
                             msg_history_scroll(500)
                             socket.emit('join_room', self.conver.id)
                             cb()
+                        }
+                        else {
+                            alert('Hệ thống nhắn tin lỗi!')
                         }
                     })
                 }
