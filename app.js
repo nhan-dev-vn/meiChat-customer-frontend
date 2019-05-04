@@ -107,6 +107,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
                         }
                         else {
                             alert('Hệ thống nhắn tin lỗi!')
+                            cb()
                         }
                     })
                 }
