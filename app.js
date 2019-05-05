@@ -116,8 +116,9 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
                         }
                     })
                 }
+                else cb(false)
             })
-        else cb()
+        else cb(true)
     }
     socket.on('sendMessage', (data) => {
         self.conver.Messages.push(data)
