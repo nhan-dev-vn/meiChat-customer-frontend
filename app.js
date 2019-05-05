@@ -159,7 +159,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
         if (newValue) msg_history_scroll(0)
     })
     setInterval(() => {
-        if (!self.showInbox && self.conver && self.conver.newMess) {
+        if (self.conver && self.conver.newMess) {
             let bell = $('.bell')
             if (bell.css('visibility') == 'hidden') bell.css('visibility', 'visible')
             else bell.css('visibility', 'hidden')

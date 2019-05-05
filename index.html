@@ -1,7 +1,9 @@
 <div class="container">
     <div class="inbox" ng-show="mcc.showInbox">
         <div class="header_inbox">
-            <p class="name_inbox">Hỗ trợ viên</p>
+            <p class="name_inbox">Hỗ trợ viên
+                <span class="icon_open glyphicon glyphicon-bell bell" ng-if="mcc.showInbox"></span>
+            </p>
             <p class="icon_close" ng-click="mcc.showInbox=!mcc.showInbox">X</p>
         </div>
         <div class="msg_history" ngf-drop="mcc.sendImgFile($files)" class="drop-box" ngf-drag-over-class="'dragover'"
