@@ -148,7 +148,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
             if (res) {
                 self.conver.newMess = false
                 let bell = $('.bell')
-                bell.css('color', 'white')
+                bell.css('visibility', 'visible')
             }
         })
     }
@@ -163,8 +163,8 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     setInterval(() => {
         if (self.conver && self.conver.newMess) {
             let bell = $('.bell')
-            if (bell.css('color') == 'white') bell.css('color', '#05728f')
-            else bell.css('color', 'white')
+            if (bell.css('visibility') == 'visible') bell.css('visibility', 'hidden')
+            else bell.css('visibility', 'visible')
         }
     }, 500)
 
