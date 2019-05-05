@@ -201,3 +201,8 @@ mei-chat-customer .bell {
     top: 15%;
     left: 30%;
 }
+mei-chat-customer .bell-header {
+    position: none;
+    display: table-cell;
+    vertical-align: middle;
+}
