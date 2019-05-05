@@ -29,7 +29,7 @@
                             </a>
                         </p>
                         <img ng-src="{{msg.paththumb}}" alt="not found" ng-if="msg.type=='img'" data-toggle="modal"
-                                data-target="#viewimg" ng-click="mcc.viewimgSrc=msg.path">
+                            data-target="#viewimg" ng-click="mcc.viewimgSrc=msg.path">
                         <span class="time_date">{{msg.sendAt | date: "MM/dd/yyyy '|' h:mma"}}</span>
                     </div>
                 </div>
@@ -47,6 +47,8 @@
         </div>
     </div>
     <span class="icon_open glyphicon glyphicon-comment" ng-if="!mcc.showInbox"
+        ng-mouseup="mcc.showInbox=!mcc.showInbox"></span>
+    <span class="icon_open glyphicon glyphicon-bell bell" ng-if="!mcc.showInbox"
         ng-mouseup="mcc.showInbox=!mcc.showInbox"></span>
 </div>
 <div class="modal fade" id="viewimg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

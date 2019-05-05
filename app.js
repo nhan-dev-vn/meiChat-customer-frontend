@@ -19,6 +19,11 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     this.showInbox = false
     this.downloadicon = '<i class="glyphicon glyphicon-circle-arrow-down"></i>'
     let owner = appOwner.owner
+    const bell = a = setInterval(()=>{
+        let bell = $('.bell')
+        if(bell.css('visibility') == 'hidden') bell.css('visibility', 'visible')
+        else bell.css('visibility', 'hidden')
+    },500)
 
     $timeout(() => {
         apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {
