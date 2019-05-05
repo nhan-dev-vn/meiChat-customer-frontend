@@ -129,7 +129,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
         $timeout(() => {
             msg_history_scroll(0)
         })
-        if (data.idUser == self.user.id || $('.write_msg').is(':focus')) {
+        if (data.idUser == self.user.id || $('.write_msg_customer').is(':focus')) {
             seenMessage()
         } else {
             self.conver.newMess = true
