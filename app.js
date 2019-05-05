@@ -64,6 +64,15 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
             })
         })
     }
+    this.msg_type_click = ()=>{
+        if(self.user.id && self.conver.newMess) 
+            apiServiceCustomer.seenMessage({
+                username: self.user.username,
+                nameConversation: self.conver.name
+            }, (res)=>{
+                if(res) self.conver.newMess = false
+            })
+    }
     $('.write_msg_customer').keypress((e) => {
         if (e.which == 13 && !e.shiftKey) {
             let content = $('.write_msg_customer').val().trim()
