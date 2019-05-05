@@ -19,11 +19,6 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     this.showInbox = false
     this.downloadicon = '<i class="glyphicon glyphicon-circle-arrow-down"></i>'
     let owner = appOwner.owner
-    const bell = a = setInterval(()=>{
-        let bell = $('.bell')
-        if(bell.css('visibility') == 'hidden') bell.css('visibility', 'visible')
-        else bell.css('visibility', 'hidden')
-    },500)
 
     $timeout(() => {
         apiServiceCustomer.getConversation({ name: ip, owner: owner }, (res) => {
@@ -69,13 +64,13 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
             })
         })
     }
-    this.msg_type_click = ()=>{
-        if(self.user.id && self.conver.newMess) 
+    this.msg_type_click = () => {
+        if (self.user.id && self.conver.newMess)
             apiServiceCustomer.seenMessage({
                 username: self.user.username,
                 nameConversation: self.conver.name
-            }, (res)=>{
-                if(res) self.conver.newMess = false
+            }, (res) => {
+                if (res) self.conver.newMess = false
             })
     }
     $('.write_msg_customer').keypress((e) => {
@@ -83,20 +78,20 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
             let content = $('.write_msg_customer').val().trim()
             if (content)
                 excNewCustomer((rs) => {
-                    if(rs)
-                    apiServiceCustomer.sendMessage({
-                        content: content,
-                        type: 'text',
-                        idUser: self.user.id,
-                        username: self.user.username,
-                        idConversation: self.conver.id,
-                        nameConversation: self.conver.name,
-                        sendAt: new Date()
-                    }, (res) => {
-                        e.preventDefault()
-                        $('.write_msg_customer').val('')
-                    })
-                    else{
+                    if (rs)
+                        apiServiceCustomer.sendMessage({
+                            content: content,
+                            type: 'text',
+                            idUser: self.user.id,
+                            username: self.user.username,
+                            idConversation: self.conver.id,
+                            nameConversation: self.conver.name,
+                            sendAt: new Date()
+                        }, (res) => {
+                            e.preventDefault()
+                            $('.write_msg_customer').val('')
+                        })
+                    else {
                         e.preventDefault()
                         $('.write_msg_customer').val('')
                         alert('lỗi')
@@ -163,6 +158,14 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     $scope.$watch(function () { return self.showInbox }, function (newValue, oldValue) {
         if (newValue) msg_history_scroll(0)
     })
+    setInterval(() => {
+        if (!self.showInbox && self.conver && self.conver.newMess) {
+            let bell = $('.bell')
+            if (bell.css('visibility') == 'hidden') bell.css('visibility', 'visible')
+            else bell.css('visibility', 'hidden')
+        }
+    }, 500)
+
     $('#viewimage').bind('mousewheel DOMMouseScroll', function (event) {
         if (event.ctrlKey == true) {
             event.preventDefault();
@@ -179,7 +182,7 @@ function Controller(apiServiceCustomer, $scope, $timeout) {
     });
 };
 function getLocalIp() {
-    ip =  window.localStorage.ip
+    ip = window.localStorage.ip
     // window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;//compatibility for Firefox and chrome
     // var pc = new RTCPeerConnection({ iceServers: [] }), noop = function () { };
     // pc.createDataChannel('');//create a bogus data channel
